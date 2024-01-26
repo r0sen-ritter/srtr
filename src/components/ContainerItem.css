@@ -1,0 +1,26 @@
+.container-item {
+  height: 5rem;
+  width: 18rem;
+
+  background-color: rgb(41, 4, 17);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 5px;
+  color: white;
+}
+.container-item-drag-handle {
+  right: 10%;
+  height: 50%;
+  width: 2rem;
+  color: rgb(186, 113, 77);
+  cursor: move;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container-item.over {
+  background-color: #ff9900;
+}
