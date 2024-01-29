@@ -1,5 +1,7 @@
+import React, { useState } from "react";
 import "./SortableContainer.css";
 import ContainerItem from "./ContainerItem";
+import DragIndicator from "./DragIndicator";
 
 interface SortableContainerProps {
   containerElements: String[];
@@ -10,13 +12,14 @@ const SortableContainer = ({
   containerElements,
   setContainerElements,
 }: SortableContainerProps) => {
-  let dragSrcIndex: number;
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [overIndex, setOverIndex] = useState<number | null>(null);
 
   const handleDragStart = (
     e: React.DragEvent<HTMLDivElement>,
     index: number
   ) => {
-    dragSrcIndex = index;
+    setDragIndex(index);
   };
 
   const handleDragOver = (
@@ -24,41 +27,51 @@ const SortableContainer = ({
     index: number
   ) => {
     e.preventDefault();
-    e.currentTarget.classList.add("over");
+    setOverIndex(index);
   };
 
   const handleDragLeave = (
     e: React.DragEvent<HTMLDivElement>,
     index: number
   ) => {
-    e.currentTarget.classList.remove("over");
+    setOverIndex(null);
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>, index: number) => {
     e.preventDefault();
+    setOverIndex(null);
 
     const newContainerElements = [...containerElements];
-    const draggedElement = newContainerElements[dragSrcIndex];
-    newContainerElements.splice(dragSrcIndex, 1);
+    const draggedElement = newContainerElements[dragIndex as number];
+    newContainerElements.splice(dragIndex as number, 1);
     newContainerElements.splice(index, 0, draggedElement);
 
     setContainerElements(newContainerElements);
-    e.currentTarget.classList.remove("over");
   };
 
   return (
     <div className="sortable-container">
       {containerElements.map((containerElement, index) => {
         return (
-          <ContainerItem
-            key={index}
-            index={index}
-            containerElement={containerElement}
-            handleDragStart={handleDragStart}
-            handleDragOver={handleDragOver}
-            handleDragLeave={handleDragLeave}
-            handleDrop={handleDrop}
-          />
+          <>
+            {dragIndex !== null &&
+              overIndex !== null &&
+              dragIndex > overIndex &&
+              index === overIndex && <DragIndicator />}
+            <ContainerItem
+              key={index}
+              index={index}
+              containerElement={containerElement}
+              handleDragStart={handleDragStart}
+              handleDragOver={handleDragOver}
+              handleDragLeave={handleDragLeave}
+              handleDrop={handleDrop}
+            />
+            {dragIndex !== null &&
+              overIndex !== null &&
+              dragIndex < overIndex &&
+              index === overIndex && <DragIndicator />}
+          </>
         );
       })}
     </div>
