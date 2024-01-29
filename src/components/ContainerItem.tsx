@@ -5,7 +5,7 @@ import { GrDrag } from "react-icons/gr";
 interface ContainerItemProps {
   containerElement: String;
   index: number;
-  handleDragStart: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
+  handleDragStart: (index: number) => void;
   handleDragOver: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
   handleDrop: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
 }
@@ -19,12 +19,12 @@ const ContainerItem = ({
 }: ContainerItemProps) => {
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleMouseDown = () => {
     setIsDragging(true);
     window.addEventListener("mouseup", handleMouseUp);
   };
 
-  const handleMouseUp = (e: MouseEvent) => {
+  const handleMouseUp = () => {
     setIsDragging(false);
     window.removeEventListener("mouseup", handleMouseUp);
   };
@@ -39,7 +39,7 @@ const ContainerItem = ({
     <div
       className="container-item"
       draggable={isDragging}
-      onDragStart={(e) => handleDragStart(e, index)}
+      onDragStart={() => handleDragStart(index)}
       onDragOver={(e) => handleDragOver(e, index)}
       onDrop={(e) => handleDrop(e, index)}
     >

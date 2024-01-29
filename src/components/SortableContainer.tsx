@@ -15,10 +15,7 @@ const SortableContainer = ({
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [overIndex, setOverIndex] = useState<number | null>(null);
 
-  const handleDragStart = (
-    e: React.DragEvent<HTMLDivElement>,
-    index: number
-  ) => {
+  const handleDragStart = (index: number) => {
     setDragIndex(index);
   };
 
