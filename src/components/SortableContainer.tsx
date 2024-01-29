@@ -41,7 +41,6 @@ const SortableContainer = ({
 
     setContainerElements(newContainerElements);
   };
-  console.log(dragIndex, overIndex);
 
   return (
     <div className="sortable-container">
