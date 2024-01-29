@@ -7,7 +7,6 @@ interface ContainerItemProps {
   index: number;
   handleDragStart: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
   handleDragOver: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
-  handleDragLeave: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
   handleDrop: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
 }
 
@@ -16,7 +15,6 @@ const ContainerItem = ({
   index,
   handleDragStart,
   handleDragOver,
-  handleDragLeave,
   handleDrop,
 }: ContainerItemProps) => {
   const [isDragging, setIsDragging] = useState(false);
@@ -43,7 +41,6 @@ const ContainerItem = ({
       draggable={isDragging}
       onDragStart={(e) => handleDragStart(e, index)}
       onDragOver={(e) => handleDragOver(e, index)}
-      onDragLeave={(e) => handleDragLeave(e, index)}
       onDrop={(e) => handleDrop(e, index)}
     >
       {containerElement}

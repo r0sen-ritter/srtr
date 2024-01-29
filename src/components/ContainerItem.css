@@ -1,15 +1,15 @@
 .container-item {
   height: 5rem;
-  width: 18rem;
-
-  background-color: rgb(41, 4, 17);
+  width: 25rem;
+  margin: 2px;
+  background-color: rgb(57, 0, 20);
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-left: 10px;
   padding-right: 5px;
-  color: white;
+  color: rgb(255, 153, 0);
 }
 .container-item-drag-handle {
   right: 10%;

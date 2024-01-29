@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./SortableContainer.css";
 import ContainerItem from "./ContainerItem";
 import DragIndicator from "./DragIndicator";
@@ -30,13 +30,6 @@ const SortableContainer = ({
     setOverIndex(index);
   };
 
-  const handleDragLeave = (
-    e: React.DragEvent<HTMLDivElement>,
-    index: number
-  ) => {
-    setOverIndex(null);
-  };
-
   const handleDrop = (e: React.DragEvent<HTMLDivElement>, index: number) => {
     e.preventDefault();
     setOverIndex(null);
@@ -48,6 +41,7 @@ const SortableContainer = ({
 
     setContainerElements(newContainerElements);
   };
+  console.log(dragIndex, overIndex);
 
   return (
     <div className="sortable-container">
@@ -64,7 +58,6 @@ const SortableContainer = ({
               containerElement={containerElement}
               handleDragStart={handleDragStart}
               handleDragOver={handleDragOver}
-              handleDragLeave={handleDragLeave}
               handleDrop={handleDrop}
             />
             {dragIndex !== null &&
