@@ -73,9 +73,20 @@ const SortableContainer = ({ children }: SortableContainerProps) => {
             e as unknown as React.DragEvent<HTMLDivElement>,
             index
           );
-        htmlItem.ondrop = (e) =>
-          handleDrop(e as unknown as React.DragEvent<HTMLDivElement>, index);
       });
+
+      container.ondrop = (e) => {
+        e.preventDefault();
+        if (overIndex !== null) {
+          handleDrop(
+            e as unknown as React.DragEvent<HTMLDivElement>,
+            overIndex
+          );
+        }
+      };
+      container.ondragover = (e) => {
+        e.preventDefault();
+      };
     }
     return () => {
       if (container) {
@@ -86,11 +97,13 @@ const SortableContainer = ({ children }: SortableContainerProps) => {
           const htmlItem = item as HTMLElement;
           htmlItem.ondragstart = null;
           htmlItem.ondragover = null;
-          htmlItem.ondrop = null;
         });
+
+        container.ondrop = null;
+        container.ondragover = null;
       }
     };
-  }, [orderedChildren, handleDragStart, handleDragOver, handleDrop]);
+  }, [orderedChildren, handleDragStart, handleDragOver, handleDrop, overIndex]);
 
   return (
     <div className="sortable-container" ref={containerRef}>
