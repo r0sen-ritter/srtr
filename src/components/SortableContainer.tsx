@@ -9,7 +9,9 @@ interface SortableContainerProps {
 const SortableContainer = ({ children }: SortableContainerProps) => {
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [overIndex, setOverIndex] = useState<number | null>(null);
-  const [dragPosition, setDragPosition] = useState<"top" | "bottom">("top");
+  const [dragPosition, setDragPosition] = useState<"top" | "bottom" | null>(
+    "top"
+  );
   const [orderedChildren, setOrderedChildren] = useState(
     React.Children.toArray(children)
   );
@@ -42,9 +44,19 @@ const SortableContainer = ({ children }: SortableContainerProps) => {
       const newOrderedChildren = [...orderedChildren];
       const draggedElement = newOrderedChildren[dragIndex];
       newOrderedChildren.splice(dragIndex, 1);
-      newOrderedChildren.splice(index, 0, draggedElement);
+
+      let insertIndex;
+      if (dragIndex < index) {
+        insertIndex = dragPosition === "top" ? index - 1 : index;
+      } else {
+        insertIndex = dragPosition === "top" ? index : index + 1;
+      }
+      newOrderedChildren.splice(insertIndex, 0, draggedElement);
       setOrderedChildren(newOrderedChildren);
     }
+
+    setDragIndex(null);
+    setDragPosition(null);
   };
 
   useEffect(() => {
