@@ -1,6 +1,8 @@
 .drag-line-indicator {
   height: 2px;
   background: #ff9900;
-  width: 50%;
+  width: 100%;
   pointer-events: none;
+  margin: 0;
+  padding: 0;
 }

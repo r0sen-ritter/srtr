@@ -42,10 +42,7 @@ const SortableContainer = ({ children }: SortableContainerProps) => {
       const newOrderedChildren = [...orderedChildren];
       const draggedElement = newOrderedChildren[dragIndex];
       newOrderedChildren.splice(dragIndex, 1);
-
-      const insertIndex = dragPosition === "top" ? index : index + 1;
-      newOrderedChildren.splice(insertIndex, 0, draggedElement);
-
+      newOrderedChildren.splice(index, 0, draggedElement);
       setOrderedChildren(newOrderedChildren);
     }
   };
