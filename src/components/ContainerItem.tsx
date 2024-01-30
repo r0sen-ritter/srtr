@@ -11,7 +11,6 @@ const ContainerItem = ({ containerElement }: ContainerItemProps) => {
 
   const handleMouseDown = () => {
     setIsDragging(true);
-    console.log("mouse down");
     window.addEventListener("mouseup", handleMouseUp);
   };
 

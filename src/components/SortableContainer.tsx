@@ -83,8 +83,6 @@ const SortableContainer = ({ children }: SortableContainerProps) => {
     };
   }, [orderedChildren, handleDragStart, handleDragOver, handleDrop]);
 
-  console.log(dragIndex, overIndex);
-
   return (
     <div className="sortable-container" ref={containerRef}>
       {orderedChildren.map((child, index) => {
